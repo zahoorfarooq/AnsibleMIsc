@@ -1,0 +1,13 @@
+all:
+  vars:
+    ansible_user: admin
+    ansible_ssh_private_key_file: /path/to/key
+  children:
+    webservers:
+      hosts:
+        web1.example.com:
+        web2.example.com:
+    dbservers:
+      hosts:
+        db1.example.com:
+        db2.example.com:
