@@ -22,3 +22,53 @@
         path: "C:\\Windows\\Temp\\notepadpp_installer.exe"
         arguments: "/S"
         state: present
+
+
+
+
+----------------------------------------------------------------
+
+
+---
+- name: Install Python on Windows Server
+  hosts: windows
+  tasks:
+    - name: Download Python Installer
+      win_get_url:
+        url: https://www.python.org/ftp/python/3.9.13/python-3.9.13-amd64.exe
+        dest: C:\Users\Administrator\Downloads\python-installer.exe
+
+    - name: Install Python
+      win_package:
+        path: C:\Users\Administrator\Downloads\python-installer.exe
+        arguments: "/quiet InstallAllUsers=1 PrependPath=1"
+        state: present
+
+    - name: Verify Python Installation
+      win_command: python --version
+      register: python_version
+
+    - name: Display Python Version
+      debug:
+        msg: "Python version installed: {{ python_version.stdout }}"
+
+
+
+
+
+----------------------------------------------------------------
+
+---
+- name: Download Notepad++ on Windows
+  hosts: windows
+  tasks:
+    - name: Download Notepad++ Installer
+      win_get_url:
+        url: https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.2/npp.8.6.2.Installer.x64.exe
+        dest: C:\Users\Administrator\Downloads\npp-installer.exe
+
+    
+
+
+
+
